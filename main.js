@@ -1,3 +1,21 @@
+// 1️⃣ Connexion à Cognito (toujours au début)
+AWS.config.region = 'us-east-1';
+AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+    IdentityPoolId: 'us-east-1:aeee888a-2982-4476-9405-e7c4cdb9cb45'
+});
+
+AWS.config.credentials.get((err) => {
+    if (err) {
+        console.error('Erreur lors de la récupération des credentials :', err);
+        return;
+    }
+    console.log('Credentials temporaires récupérés :', AWS.config.credentials);
+    alert('Connexion à Cognito réussie !');
+
+    // 2️⃣ Tout le reste de ton code AWS (ex: S3) vient ici
+    // ...
+});
+
 //Get needed elements from the DOM
 
 const map = document.querySelector("svg");
