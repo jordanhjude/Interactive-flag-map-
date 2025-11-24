@@ -16,6 +16,20 @@ AWS.config.credentials.get((err) => {
     // ...
 });
 
+
+// ===== Code AWS S3 ici =====
+    const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
+
+    // Lister les objets du bucket (remplace par le nom de ton bucket)
+    const params = { Bucket: 'interactiveflagmapbucket' };
+    s3.listObjectsV2(params, (err, data) => {
+        if (err) console.error('Erreur S3 :', err);
+        else console.log('Contenu du bucket :', data.Contents);
+    });
+
+    // ===== Fin du code AWS =====
+});
+
 //Get needed elements from the DOM
 
 const map = document.querySelector("svg");
