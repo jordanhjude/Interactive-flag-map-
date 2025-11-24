@@ -1,7 +1,7 @@
 /* 1️⃣ Connexion à Cognito (toujours au début) */
 AWS.config.region = 'us-east-1';
 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-IdentityPoolId: 'us-east-1'
+IdentityPoolId: 'us-east-1:cad8cabd-3198-47cd-a063-cf82a13a429b'
 });
 
 // On récupère les credentials avant d'exécuter le reste
