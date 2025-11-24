@@ -1,251 +1,311 @@
-RESET & GLOBAL
+/*
+* RESET & GLOBAL
 */
+
+:root {
+  /* Variables de Couleurs */
+  --color-primary: #dcbfff;
+  --color-secondary: #c99aff;
+  --color-dark-bg: #151218;
+  --color-mid-bg: #1d1a20;
+  --color-mid-hover: #2e2a33;
+  --color-stroke: #443d4b;
+  --color-text-light: #fff;
+  --color-text-dark: #333;
+
+  /* Autres Variables */
+  --transition-speed: 150ms;
+  --panel-transition: 600ms cubic-bezier(0.77, 0.18, 0.18, 1);
+  --base-font-size: 16px; /* Pour référence rem */
+}
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  }
+  /* Optionnel : meilleure gestion de l'héritage de la police et du responsive */
+  font-size: 100%;
+}
+
+html {
+  /* Meilleure gestion des tailles de police pour l'accessibilité */
+  font-size: var(--base-font-size);
+}
 
 body {
-font-family: sans-serif;
-color: #fff;
-background-color: #151218;
-overflow: hidden;
+  font-family: 'Inter', sans-serif; /* Utilisez une police spécifique si possible */
+  color: var(--color-text-light);
+  background-color: var(--color-dark-bg);
+  /* Suppression de 'overflow: hidden' sur body pour permettre le scroll de la page si nécessaire */
+  line-height: 1.6; /* Améliore la lisibilité */
+  -webkit-font-smoothing: antialiased; /* Améliore le rendu de la police sur certains navigateurs */
+}
+
+/* ♿ Accessibilité & Interactions */
+a:focus, button:focus, input:focus, select:focus, textarea:focus, [tabindex]:focus {
+    outline: none; /* Supprime l'outline par défaut, MAIS */
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
+  /* Ajoute un style de focus visible uniquement lors de la navigation au clavier */
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
 }
 
 /* SCROLLBAR */
+/* Utilisation de la couleur de la variable */
 ::-webkit-scrollbar {
-width: 10px;
+  width: 0.625rem; /* 10px en rem */
 }
 ::-webkit-scrollbar-track {
-background: #2d2733;
+  background: var(--color-mid-hover);
 }
 ::-webkit-scrollbar-thumb {
-background: #555;
+  background: var(--color-stroke);
+  border-radius: 0.3125rem; /* Arrondi */
 }
 ::-webkit-scrollbar-thumb:hover {
-background: #dcbfff;
+  background: var(--color-primary);
 }
+
+
+/* --- SECTIONS SPÉCIFIQUES --- */
 
 /* MAP CONTAINER */
 .map-container {
-position: relative;
-width: 100vw;
-height: 100vh;
-background-color: #151218;
-display: flex;
-justify-content: center;
-align-items: center;
-overflow: hidden;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color-dark-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Conservez ceci pour le container de la carte */
 }
 
 svg {
-width: 100%;
-height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 path {
-fill: #443d4b;
-stroke: #dcbfff;
-transition: 150ms;
-cursor: pointer;
+  fill: var(--color-stroke);
+  stroke: var(--color-primary);
+  transition: all var(--transition-speed);
+  cursor: pointer;
 }
 
 path:hover {
-fill: #c99aff;
+  fill: var(--color-secondary);
 }
 
 /* SIDE PANEL */
 .side-panel {
-position: fixed;
-background-color: #1d1a20;
-padding: 2em 1.5em;
-top: 0;
-left: -100%;
-width: 85vw;
-max-width: 28em;
-height: 100vh;
-transition: 600ms cubic-bezier(0.77, 0.18, 0.18, 1);
-overflow-y: auto;
--webkit-overflow-scrolling: touch; /* smooth scroll mobile */
-z-index: 10;
-cursor: grab;
+  position: fixed;
+  background-color: var(--color-mid-bg);
+  padding: 2rem 1.5rem; /* Utilisation de rem */
+  top: 0;
+  left: -100%;
+  width: 85vw;
+  max-width: 28rem; /* Utilisation de rem */
+  height: 100vh;
+  transition: var(--panel-transition);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: 10;
+  /* 'cursor: grab' est adapté pour une carte, mais 'cursor: default' pourrait être préférable
+     pour le panneau lui-même s'il est principalement pour la lecture. */
+  cursor: default; 
 }
 
 .side-panel-open {
-left: 0;
+  left: 0;
 }
 
 .hide {
-opacity: 0;
-pointer-events: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* CLOSE BUTTON */
 .close-btn {
-position: absolute;
-top: 1em;
-right: 1em;
-width: 3.5em;
-height: 3.5em;
-border: none;
-background-color: #443d4b;
-color: #fff;
-border-radius: 0.5em;
-display: flex;
-justify-content: center;
-align-items: center;
-cursor: pointer;
-transition: 150ms;
-touch-action: manipulation;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  border: none;
+  background-color: var(--color-stroke);
+  color: var(--color-text-light);
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+  touch-action: manipulation;
 }
 
 .close-btn i {
-font-size: 1.6em;
+  font-size: 1.6rem;
 }
 
 .close-btn:hover {
-background-color: #c99aff;
+  background-color: var(--color-secondary);
 }
 
 /* LOADING */
 .loading {
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-font-size: clamp(1.2em, 4vw, 2em);
-color: #dcbfff;
-pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  color: var(--color-primary);
+  pointer-events: none;
 }
 
 /* COUNTRY FLAG */
 .country-flag {
-width: 80%;
-max-width: 16em;
-height: auto;
-object-fit: contain;
-margin: 1em auto;
-display: block;
+  width: 80%;
+  max-width: 16rem;
+  height: auto;
+  object-fit: contain;
+  margin: 1rem auto;
+  display: block;
 }
 
 /* TEXT & LISTS */
 .side-panel .container {
-font-size: clamp(0.9em, 2vw, 1.2em);
+  /* Utilisation de clamp() avec des valeurs rem pour un meilleur contrôle */
+  font-size: clamp(0.9rem, 2vw, 1.2rem); 
 }
 
 .side-panel .container > ul {
-margin-top: 2em;
-list-style: none;
+  margin-top: 2rem;
+  list-style: none;
 }
 
 .side-panel .container > ul > li {
-margin-bottom: 1.5em;
-line-height: 1.5;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
 }
 
 .side-panel ul ul {
-margin-top: 1em;
-font-size: 0.9em;
-list-style: circle;
-padding-left: 1.5em;
+  margin-top: 1rem;
+  font-size: 0.9rem; /* Taille basée sur la taille parente calculée par clamp() */
+  list-style: circle;
+  padding-left: 1.5rem;
 }
 
 .side-panel strong {
-color: #dcbfff;
+  color: var(--color-primary);
+  font-weight: 600; /* Assurer une bonne visibilité du gras */
 }
 
 /* ZOOM CONTROLS */
 .zoom-controls {
-position: fixed;
-bottom: 1em;
-right: 1em;
-z-index: 20;
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 0.4em;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .zoom-controls button {
-width: 3em;
-height: 3em;
-font-size: 1.4em;
-background-color: #443d4b;
-color: #fff;
-border: 1px solid #dcbfff;
-cursor: pointer;
-transition: 150ms;
-border-radius: 0.4em;
-touch-action: manipulation;
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.4rem;
+  background-color: var(--color-stroke);
+  color: var(--color-text-light);
+  border: 1px solid var(--color-primary);
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
+  border-radius: 0.4rem;
+  touch-action: manipulation;
 }
 
 .zoom-controls button:hover:not(:disabled) {
-background-color: #2e2a33;
+  background-color: var(--color-mid-hover);
 }
 
 button:disabled {
-background-color: #1d1a20;
-border: 1px solid #443d4b;
-cursor: not-allowed;
-color: #333;
+  background-color: var(--color-mid-bg);
+  border: 1px solid var(--color-stroke);
+  cursor: not-allowed;
+  color: var(--color-text-dark);
 }
 
 .zoom-value {
-text-align: center;
-font-size: 0.9em;
-color: #dcbfff;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-primary);
 }
 
-/* MEDIA QUERIES */
 
-/* Tablettes */
-@media (max-width: 768px) {
-.side-panel {
-width: 70vw;
-padding: 1.5em;
-}
-.close-btn {
-width: 3.5em;
-height: 3.5em;
-}
-.zoom-controls button {
-width: 2.5em;
-height: 2.5em;
-}
-}
+/* --- MEDIA QUERIES RESPONSIVES --- */
 
-@media (max-width: 480px) {
-.side-panel {
-width: 90vw;            /* le panneau prend presque tout l'écran */
-padding: 1em;            /* padding réduit pour plus de place */
-overflow-y: scroll;      /* permet de scroller tout le contenu */
--webkit-overflow-scrolling: touch; /* scroll fluide */
+/* Tablettes (Taille max pour cibler les écrans plus petits ou égaux à 768px) */
+@media (max-width: 48rem) { /* 768px */
+  .side-panel {
+    width: 70vw;
+    padding: 1.5rem;
+  }
+  .close-btn {
+    width: 3rem;
+    height: 3rem;
+    font-size: 0.9rem; /* Réduction de la taille de l'icône si elle est trop grande */
+  }
+  .zoom-controls button {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.2rem;
+  }
 }
 
-.side-panel .container {
-max-height: 90vh;        /* limite la hauteur pour que scroll fonctionne */
-overflow-y: auto;
-}
+/* Téléphones (Taille max pour cibler les écrans plus petits ou égaux à 480px) */
+@media (max-width: 30rem) { /* 480px */
+  .side-panel {
+    width: 95vw; /* Augmente la largeur pour le très petit mobile */
+    max-width: none; /* Supprime la limite max pour maximiser l'espace */
+    padding: 1rem 0.75rem; /* Padding réduit */
+    /* La suppression des propriétés `max-height` et `overflow-y` du .container est CRUCIALE.
+       Le side-panel gère déjà le défilement (`overflow-y: auto;`) pour toute sa hauteur (100vh).
+       Le contenu doit simplement se dérouler à l'intérieur.
+    */
+  }
+  
+  /* Retirer ces styles : 
+  .side-panel .container {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  */
 
-.close-btn {
-width: 2.5em;
-height: 2.5em;
-}
+  .close-btn {
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .close-btn i {
+    font-size: 1.4rem;
+  }
 
-.zoom-controls button {
-width: 2em;
-height: 2em;
-font-size: 1.1em;
-}
+  .zoom-controls button {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.1rem;
+  }
 
-.zoom-value {
-font-size: 0.8em;
-}
+  .zoom-value {
+    font-size: 0.8rem;
+  }
 
-.country-flag {
-max-width: 12em;
+  .country-flag {
+    max-width: 10rem;
+  }
 }
-}
-
