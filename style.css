@@ -1,0 +1,217 @@
+/* RESET & GLOBAL */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  color: #fff;
+  background-color: #151218;
+  overflow: hidden;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2d2733;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #dcbfff;
+}
+
+/* MAP CONTAINER */
+.map-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #151218;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+path {
+  fill: #443d4b;
+  stroke: #dcbfff;
+  transition: 150ms;
+  cursor: pointer;
+}
+
+path:hover {
+  fill: #c99aff;
+}
+
+/* SIDE PANEL (RESPONSIVE) */
+.side-panel {
+  position: fixed;
+  background-color: #1d1a20;
+  padding: 2em 1.5em;
+  top: 0;
+  left: -100%;
+  width: 85vw;
+  max-width: 28em;
+  height: 100vh;
+  transition: 600ms cubic-bezier(0.77, 0.18, 0.18, 1);
+  overflow-y: auto;
+  z-index: 10;
+  cursor: grab;
+}
+
+.side-panel-open {
+  left: 0;
+}
+
+.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* CLOSE BUTTON */
+.close-btn {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 3.5em;
+  height: 3.5em;
+  border: none;
+  background-color: #443d4b;
+  color: #fff;
+  border-radius: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 150ms;
+}
+
+.close-btn i {
+  font-size: 1.6em;
+}
+
+.close-btn:hover {
+  background-color: #c99aff;
+}
+
+/* LOADING */
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(1.2em, 4vw, 2em);
+  color: #dcbfff;
+  pointer-events: none;
+}
+
+/* COUNTRY FLAG */
+.country-flag {
+  width: 70%;
+  max-width: 18em;
+  object-fit: contain;
+  margin: 1.5em auto;
+  display: block;
+}
+
+/* TEXT & LISTS */
+.side-panel .container > ul {
+  margin-top: 2em;
+  list-style: none;
+}
+
+.side-panel .container > ul > li {
+  margin-bottom: 1.5em;
+  line-height: 1.5;
+}
+
+.side-panel ul ul {
+  margin-top: 1em;
+  font-size: 0.9em;
+  list-style: circle;
+  padding-left: 1.5em;
+}
+
+.side-panel strong {
+  color: #dcbfff;
+}
+
+/* ZOOM CONTROLS */
+.zoom-controls {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.zoom-controls button {
+  width: 3em;
+  height: 3em;
+  font-size: 1.4em;
+  background-color: #443d4b;
+  color: #fff;
+  border: 1px solid #dcbfff;
+  cursor: pointer;
+  transition: 150ms;
+  border-radius: 0.4em;
+}
+
+.zoom-controls button:hover:not(:disabled) {
+  background-color: #2e2a33;
+}
+
+button:disabled {
+  background-color: #1d1a20;
+  border: 1px solid #443d4b;
+  cursor: not-allowed;
+  color: #333;
+}
+
+.zoom-value {
+  text-align: center;
+  font-size: 0.9em;
+  color: #dcbfff;
+}
+
+/* MEDIA QUERIES */
+@media (min-width: 768px) {
+  .side-panel {
+    width: 28em;
+  }
+
+  .close-btn {
+    width: 4em;
+    height: 4em;
+  }
+}
+
+@media (max-width: 480px) {
+  .close-btn {
+    width: 3em;
+    height: 3em;
+  }
+
+  .zoom-controls button {
+    width: 2.8em;
+    height: 2.8em;
+  }
+}
