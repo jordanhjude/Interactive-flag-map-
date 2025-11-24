@@ -216,21 +216,36 @@ height: 2.5em;
 }
 }
 
-/* Smartphones */
 @media (max-width: 480px) {
 .side-panel {
-width: 90vw;
-padding: 1em;
+width: 90vw;            /* le panneau prend presque tout l'écran */
+padding: 1em;            /* padding réduit pour plus de place */
+overflow-y: scroll;      /* permet de scroller tout le contenu */
+-webkit-overflow-scrolling: touch; /* scroll fluide */
 }
+
+.side-panel .container {
+max-height: 90vh;        /* limite la hauteur pour que scroll fonctionne */
+overflow-y: auto;
+}
+
 .close-btn {
 width: 2.5em;
 height: 2.5em;
 }
+
 .zoom-controls button {
 width: 2em;
 height: 2em;
+font-size: 1.1em;
 }
+
 .zoom-value {
 font-size: 0.8em;
 }
+
+.country-flag {
+max-width: 12em;
 }
+}
+
