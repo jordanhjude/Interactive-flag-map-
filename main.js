@@ -1,34 +1,35 @@
-// 1️⃣ Connexion à Cognito (toujours au début)
+/* 1️⃣ Connexion à Cognito (toujours au début) */
 AWS.config.region = 'us-east-1';
 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-    IdentityPoolId: 'us-east-1:aeee888a-2982-4476-9405-e7c4cdb9cb45'
+IdentityPoolId: 'us-east-1:aeee888a-2982-4476-9405-e7c4cdb9cb45'
 });
 
+// On récupère les credentials avant d'exécuter le reste
 AWS.config.credentials.get((err) => {
-    if (err) {
-        console.error('Erreur lors de la récupération des credentials :', err);
-        return;
-    }
-    console.log('Credentials temporaires récupérés :', AWS.config.credentials);
-    alert('Connexion à Cognito réussie !');
+if (err) {
+console.error('Erreur lors de la récupération des credentials :', err);
+return;
+}
+console.log('Credentials temporaires récupérés :', AWS.config.credentials);
+alert('Connexion à Cognito réussie !');
 
-    // 2️⃣ Tout le reste de ton code AWS (ex: S3) vient ici
-    // ...
-});
-
-
+```
 // ===== Code AWS S3 ici =====
-    const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
+const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
 
-    // Lister les objets du bucket (remplace par le nom de ton bucket)
-    const params = { Bucket: 'interactiveflagmapbucket' };
-    s3.listObjectsV2(params, (err, data) => {
-        if (err) console.error('Erreur S3 :', err);
-        else console.log('Contenu du bucket :', data.Contents);
-    });
-
-    // ===== Fin du code AWS =====
+// Lister les objets du bucket (remplace par le nom de ton bucket)
+const params = { Bucket: 'interactiveflagmapbucket' };
+s3.listObjectsV2(params, (err, data) => {
+    if (err) console.error('Erreur S3 :', err);
+    else console.log('Contenu du bucket :', data.Contents);
 });
+
+// ===== Fin du code AWS =====
+```
+
+});
+
+
 
 //Get needed elements from the DOM
 
