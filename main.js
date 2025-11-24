@@ -1,7 +1,7 @@
 /* 1️⃣ Connexion à Cognito (toujours au début) */
 AWS.config.region = 'us-east-1';
 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-IdentityPoolId: 'us-east-1:aeee888a-2982-4476-9405-e7c4cdb9cb45'
+IdentityPoolId: 'us-east-1'
 });
 
 // On récupère les credentials avant d'exécuter le reste
@@ -13,7 +13,6 @@ return;
 console.log('Credentials temporaires récupérés :', AWS.config.credentials);
 alert('Connexion à Cognito réussie !');
 
-```
 // ===== Code AWS S3 ici =====
 const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
 
@@ -24,7 +23,6 @@ s3.listObjectsV2(params, function(err, data) {
     else console.log('Contenu du bucket :', data.Contents);
 });
 // ===== Fin du code AWS =====
-```
 
 });
 
